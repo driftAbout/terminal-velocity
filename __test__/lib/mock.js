@@ -15,6 +15,7 @@ mock.track.createOne = () => {
   let createdTrack = {};
 
   return new Track({
+    title: faker.internet.words(2),
   })
     .then(() => {return createdTrack;});
 };

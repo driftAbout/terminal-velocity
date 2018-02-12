@@ -1,13 +1,13 @@
 {
   "name": "terminal-velocity",
   "version": "1.0.0",
-  "description": "",
+  "description": "mid term project",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --verbose -i"
   },
   "repository": {
     "type": "git",
@@ -21,8 +21,13 @@
   },
   "homepage": "https://github.com/Jordanwvn/terminal-velocity#readme",
   "devDependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
     "eslint": "^4.17.0",
-    "jest": "^22.2.2"
+    "express": "^4.16.2",
+    "faker": "^4.1.0",
+    "jest": "^22.2.2",
+    "mongoose": "^5.0.4",
+    "superagent": "^3.8.2"
   }
 }
