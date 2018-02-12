@@ -9,8 +9,15 @@
 	                                                                                                                       /\___/
 	                                                                                                                       \/__/ 
 
+[BADGES HERE]
+
 ## General information
-**_Authors_**: Jeremy Pearson, Kevin Miller, Jordan Van Ness, Jamie Williams, Rima Hiraoka
+**_Authors_**: 
+* Jeremy Pearson: https://github.com/jpjazzy
+* Kevin Miller: https://github.com/driftAbout
+* Jordan Van Ness: https://github.com/Jordanwvn
+* Jamie Williams: [JAMIE LINK]
+* Rima Hiraoka: [RIMA LINK]
 
 **_Version_**: 1.0.0
 
@@ -22,13 +29,17 @@
 
 Terminal velocity music player that you can store playlists to save to a database for persistance and see what kind of music your friends are into. Terminal velocity will allow you to play music from your terminal, however if you don't have the music stored locally you will not be able to listen. 
 
+## How to use
+
+## Tests
+
 ## Basic Structure
 
 ![Structure Overview](./images/terminal-velocity-diagram.png)
 
 ### Tree structure
 
-(PROJECT TREE STRUCTURE WILL GO HERE)
+[PROJECT TREE STRUCTURE WILL GO HERE]
 
 ## Routes
 
