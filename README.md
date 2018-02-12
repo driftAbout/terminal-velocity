@@ -1,3 +1,4 @@
+
 	
 	 ______                                                ___       __  __          ___                       __                
 	/\__  _\                          __                  /\_ \     /\ \/\ \        /\_ \                   __/\ \__             
@@ -16,12 +17,12 @@
 * Jeremy Pearson: https://github.com/jpjazzy
 * Kevin Miller: https://github.com/driftAbout
 * Jordan Van Ness: https://github.com/Jordanwvn
-* Jamie Williams: [JAMIE LINK]
-* Rima Hiraoka: [RIMA LINK]
+* Jamie Williams: https://github.com/jlwilliams46
+* Rima Hiraoka: https://github.com/Sobacha
 
 **_Version_**: 1.0.0
 
-**_Libraries_**: (none)
+**_Libraries_**: mpg123
 
 **_Last modified_**: 2/12/2018
 
@@ -30,6 +31,12 @@
 Terminal velocity music player that you can store playlists to save to a database for persistance and see what kind of music your friends are into. Terminal velocity will allow you to play music from your terminal, however if you don't have the music stored locally you will not be able to listen. 
 
 ## How to use
+
+**NOTE**: To use this player you will need to install mpg123
+*For install instructions on mpg123, please visit*: https://www.npmjs.com/package/mpg123
+
+ 1. Install mpg123 
+ 2. Install project dependencies
 
 ## Tests
 
