@@ -12,12 +12,11 @@ mock.track = {};
 
 mock.track.createOne = () => {
 
-  let createdTrack = {};
-
   return new Track({
-    title: faker.internet.words(2),
+    title: faker.lorem.words(2),
   })
-    .then(() => {return createdTrack;});
+    .save();
+
 };
 
 mock.track.removeAll = () => Promise.all([Track.remove()]);

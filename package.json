@@ -7,7 +7,16 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "jest --verbose -i"
+    "test": "jest --verbose -i",
+    "start": "node index.js",
+    "start:watch": "nodemon index.js",
+    "start:debug": "DEBUG=http* nodemon index.js",
+    "test:watch": "jest -i --watchAll",
+    "test:debug": "DEBUG=http* jest -i",
+    "lint": "eslint .",
+    "lint:test": "npm run lint && npm test",
+    "start-db": "mkdir -p ./data/db && mongod --dbpath ./data/db",
+    "stop-db": "killall mongod"
   },
   "repository": {
     "type": "git",
@@ -22,6 +31,7 @@
   "homepage": "https://github.com/Jordanwvn/terminal-velocity#readme",
   "devDependencies": {
     "body-parser": "^1.18.2",
+    "debug": "^3.1.0",
     "dotenv": "^5.0.0",
     "eslint": "^4.17.0",
     "express": "^4.16.2",

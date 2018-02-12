@@ -2,10 +2,11 @@
 
 const path = require('path');
 require('dotenv').config({path: path.resolve(process.cwd(), '__test__/.test.env')});
-const server = require('../../lib/server');
+const server = require('../../../lib/server');
 const superagent = require('superagent');
 const PORT = process.env.PORT;
-const mock = require('../lib/mock');
+const mock = require('../../lib/mock');
+const faker = require('faker');
 
 
 describe('GET /api/v1/play/:_id', () => { 
@@ -26,8 +27,8 @@ describe('GET /api/v1/play/:_id', () => {
       'should respond with http res status 200',
       () => {
         return superagent.get(`:${PORT}/api/v1/play/${this.mockTrack._id}`)
-          .then(res => 
-            expect(res.status).toBe(200);
+          .then(res =>
+            expect(res.status).toBe(200)
           );
       });
 

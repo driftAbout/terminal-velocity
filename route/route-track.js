@@ -2,6 +2,7 @@
 
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
+const Track = require('../model/track');
 
 
 module.exports = router => {
@@ -17,13 +18,13 @@ module.exports = router => {
       }
 
       // fetch all tracks
-/*      return Track.find()
+      /*      return Track.find()
         .then(tracks => {
           let tracksIds = tracks.map(track => track._id);
 
           res.status(200).json(tracksIds);
         })
         .catch(err => errorHandler(err, res));
-    })
-*/
+*/    });
+
 };
