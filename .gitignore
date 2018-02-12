@@ -1,6 +1,8 @@
 # 401 JS
-db
-**.env
+
+**/db
+*.env
+.*.env
 temp
 build
 
@@ -18,7 +20,6 @@ build
 .Trash-*
 
 # .nfs files are created when an open file is removed but is still being accessed
-.nfs*
 
 ### Node ###
 # Logs
@@ -143,3 +144,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/vim,osx,node,linux,windows
+

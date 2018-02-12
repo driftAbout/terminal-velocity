@@ -1,0 +1,28 @@
+{
+  "name": "terminal-velocity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jordanwvn/terminal-velocity.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jordanwvn/terminal-velocity/issues"
+  },
+  "homepage": "https://github.com/Jordanwvn/terminal-velocity#readme",
+  "devDependencies": {
+    "dotenv": "^5.0.0",
+    "eslint": "^4.17.0",
+    "jest": "^22.2.2"
+  }
+}
