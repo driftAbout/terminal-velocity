@@ -2,6 +2,7 @@
 
 const faker = require('faker');
 const Track = require('../../model/track');
+const Playlist = require('../../model/playlist');
 
 const mock = module.exports = {};
 
@@ -20,5 +21,29 @@ mock.track.createOne = () => {
 };
 
 mock.track.removeAll = () => Promise.all([Track.remove()]);
+
+
+// Playlist mock - Create one, remove all
+mock.playlist = {};
+
+mock.playlist.createOne = () => {
+
+  let trackOne, trackTwo;
+  return mock.track.createOne()
+    .then(track => {
+        trackOne = track;
+        return mock.track.createOne()
+          .then(track => {
+            trackTwo = track
+              return new Playlist({
+                name: faker.lorem.word(),
+                tracks: [trackOne._id, trackTwo._id]
+              })
+                .save();
+          });
+    });
+};
+
+mock.playlist.removeAll = () => Promise.all([Playlist.remove()]);
 
 
