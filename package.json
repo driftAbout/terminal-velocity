@@ -8,7 +8,11 @@
   },
   "dependencies": {
     "audio-loader": "^1.0.3",
-    "audio-play": "^2.2.0"
+    "audio-play": "^2.2.0",
+    "audio-sink": "^1.1.6",
+    "audio-speaker": "^1.5.0",
+    "dir-to-json": "0.0.3",
+    "mpg123": "^0.2.3"
   },
   "devDependencies": {},
   "scripts": {

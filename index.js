@@ -1,6 +1,17 @@
 'use strict';
 
-const play = require('audio-play');
-const load = require('audio-loader');
+const Queue = require('./lib/queue.js');
+const Collection = require('./lib/collection.js');
 
-load(`./music/1.mp3`).then(play);
+const rootDirectory = './music';
+// const rootDirectory = '/home/jordan/Music';
+
+let collection = new Collection (rootDirectory);
+
+collection.import(collection.root);
+// console.log("tree", tree); // NOTE needs to be called asynchronously
+
+// let queue = new Queue ();
+// queue.enqueue('./music/1.mp3');
+// queue.enqueue('./music/1.mp3');
+// queue.dequeue();
