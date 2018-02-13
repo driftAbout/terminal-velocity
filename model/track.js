@@ -7,6 +7,7 @@ const debug = require('debug')('http:track-model');
 const Track = mongoose.Schema({
   path: {type: String, required: true},
   title: {type: String},
+  artist_name: {type: String, required: true},
   album_title: {type: String},
   album_id: {type: mongoose.Schema.Types.ObjectId, ref: 'album'},
 }, {timestamps: true});
@@ -18,7 +19,8 @@ Track.pre('save', function(next){
   debug('album_id:', this.album_id, 'this.album_title:', this.album_title );
   if (!this.album_id && !this.album_title) return next(new Error('Validation Error. album id or album title required.'));
   let query = this.album_id;
-  if(!this.album_id) query = {title: this.album_title};
+  //if(!this.album_id) query = {title: this.album_title};
+  if(!this.album_id) query = {title: this.album_title, artist_name: this.artist_name};
   debug('query', query);
   Album.findOne(query)
     .then(album => {

@@ -79,12 +79,12 @@ function searchArist(name) {
     })
     .then(artist => {
       if (!artist) return;
-      artist.album_ids.forEach(album_id => {
-        album_id.track_ids.forEach(track_id => {
+      artist.album_ids.forEach(album => {
+        album.track_ids.forEach(track => {
           tempArray.push({
-            title: track_id.track.title,
-            path: track_id.track.path,
-            album_title: album_id.album.title,
+            title: track.title,
+            path: track.path,
+            album_title: album.title,
             artist_name: artist.name,
           });    
         });
