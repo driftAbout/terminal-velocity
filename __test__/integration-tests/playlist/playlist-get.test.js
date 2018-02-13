@@ -26,7 +26,7 @@ describe('GET /api/v1/play/playlist/:name', () => {
 
     test(
       'should respond with http res status 200',
-      () => {console.log(this.mockPlaylist);
+      () => {
         return superagent.get(`:${PORT}/api/v1/play/playlist/${this.mockPlaylist.name}`)
           .then(res =>
             expect(res.status).toBe(200)

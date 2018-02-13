@@ -15,6 +15,7 @@ mock.track.createOne = () => {
 
   return new Track({
     title: faker.lorem.words(2),
+    filepath: faker.lorem.words(5),
   })
     .save();
 
@@ -34,12 +35,16 @@ mock.playlist.createOne = () => {
         trackOne = track;
         return mock.track.createOne()
           .then(track => {
-            trackTwo = track
-              return new Playlist({
-                name: faker.lorem.word(),
-                tracks: [trackOne._id.toString(), trackTwo._id.toString()]
-              })
-                .save();
+            trackTwo = track;
+            return new Playlist({
+              name: faker.lorem.word(),
+            })
+          })
+          .then(playlist => {
+            playlist.tracks.push(trackOne);
+            playlist.tracks.push(trackTwo);
+            playlist.save();
+            return playlist;
           });
     });
 };

@@ -12,14 +12,14 @@ module.exports = router => {
 
     .get(bodyParser, (req, res) => {
       if(req.params.name) {
-        let query = Playlist.findOne({ 'name': `${req.params.name}` });
-        query.select('tracks');
-        query.exec(function(err, playlist) {
-          if(err) {
-            return errorHandler(new Error('Item Not Found'), res);
-          }
-          res.status(200).json(playlist.tracks);
-        });
+        return Playlist.findOne({ name: `${req.params.name}` })
+          .populate('tracks')
+          .exec(function(err, playlist) {
+            if(err) {console.log(err);
+              return errorHandler(new Error('Item Not Found'), res);
+            }console.log(playlist);
+            res.status(200).json(playlist);
+          });
       }
     });
 
