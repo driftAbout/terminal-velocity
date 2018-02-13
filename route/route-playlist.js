@@ -11,13 +11,16 @@ module.exports = router => {
   router.route('/play/playlist/:name?')
 
     .get(bodyParser, (req, res) => {
-      if(req.body.name){
-        return Playlist.findOne({ 'name': `${req.body.name}` }, 'tracks', (err, tracks))
-          if(err){
-            return errorHandler(err, res);
+      if(req.params.name) {
+        let query = Playlist.findOne({ 'name': `${req.params.name}` });
+        query.select('tracks');
+        query.exec(function(err, playlist) {
+          if(err) {
+            return errorHandler(new Error('Item Not Found'), res);
           }
-          res.status(200).json(tracks);
+          res.status(200).json(playlist.tracks);
+        });
       }
     });
 
-};
+}

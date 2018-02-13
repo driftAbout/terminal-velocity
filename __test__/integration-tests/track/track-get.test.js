@@ -2,11 +2,11 @@
 
 const path = require('path');
 require('dotenv').config({path: path.resolve(process.cwd(), '__test__/.test.env')});
-const server = require('../../../lib/server');
-const superagent = require('superagent');
 const PORT = process.env.PORT;
-const mock = require('../../lib/mock');
+const superagent = require('superagent');
 const faker = require('faker');
+const mock = require('../../lib/mock');
+const server = require('../../../lib/server');
 
 
 describe('GET /api/v1/play/:_id', () => { 

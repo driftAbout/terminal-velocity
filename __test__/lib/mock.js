@@ -37,7 +37,7 @@ mock.playlist.createOne = () => {
             trackTwo = track
               return new Playlist({
                 name: faker.lorem.word(),
-                tracks: [trackOne._id, trackTwo._id]
+                tracks: [trackOne._id.toString(), trackTwo._id.toString()]
               })
                 .save();
           });

@@ -9,7 +9,7 @@ module.exports = router => {
 
   router.route('/play/:_id?')
 
-    .get(bodyParser, (req, res) => {
+    .get(bodyParser, (req, res) => {console.log(req.params);
       // fetch one track
       if(req.params._id){
         return Track.findById(req.params._id)
