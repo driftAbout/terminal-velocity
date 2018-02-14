@@ -15,18 +15,29 @@ const Track = mongoose.Schema({
 //hooks
 Track.pre('save', function(next){
   this.title = this.path.match(/[^/]+$/g)[0].split('.').slice(0,-1).join('');
+
   debug('album_id:', this.album_id, 'this.album_title:', this.album_title );
+
   if (!this.album_id && !this.album_title) return next(new Error('Validation Error. album id or album title required.'));
+
   let query = this.album_id;
+
   if(!this.album_id) query = {title: this.album_title};
+
   debug('query', query);
+
   Album.findOne(query)
     .then(album => {
+
       debug('album', album);
+
       if(!album) return;
+
       album.track_ids = [...new Set(album.track_ids).add(this._id)];
+
       if(!this.album_id) this.album_id = album._id;
       album.save();
+
     })
     .then(next)
     .catch(err => err);

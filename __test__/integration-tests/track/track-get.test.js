@@ -9,7 +9,7 @@ const mock = require('../../lib/mock');
 const server = require('../../../lib/server');
 
 
-describe('GET /api/v1/play/:_id', () => { 
+describe('GET /api/v1/play/track/:name?', () => { 
   
   beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
   afterAll(() => server.stop());
@@ -26,7 +26,7 @@ describe('GET /api/v1/play/:_id', () => {
     test(
       'should respond with http res status 200',
       () => {
-        return superagent.get(`:${PORT}/api/v1/play/${this.mockTrack._id}`)
+        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.name}`)
           .then(res =>
             expect(res.status).toBe(200)
           );
@@ -35,6 +35,10 @@ describe('GET /api/v1/play/:_id', () => {
     test(
       'should return a file path for a requested track',
       () => {
+        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.name}`)
+          .then(res =>
+            expect(res.body.path).toEqual(this.mockTrack.path)
+          );
       });
 
   });
@@ -42,19 +46,15 @@ describe('GET /api/v1/play/:_id', () => {
   describe('Invalid request', () => {
 
     test(
-      'should throw an error 404 if passing id does not exist',
+      'should throw an error 404 if passing track name does not exist',
       () => {
+        return superagent.get(`:${PORT}/api/v1/play/track/nonexisting`)
+          .catch(err => 
+            expect(err.status).tobe(404);
+            expect(err.message).toEqual('Item Not Found');
+          );
       });
 
-    test(
-      '',
-      () => {
-      });
-
-    test(
-      '',
-      () => {
-      });
   });
 
 });
