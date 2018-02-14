@@ -16,6 +16,7 @@ module.exports  = function(router) {
 
   router.route('/import')
     .post(bodyParser, upload.single('import'), (req, res) => {
+      console.log(req.body);
       //if (!req.file) return errorHandler(new Error('Multi-part form data error: Missing file'), res);
       if (!req.body.import && !req.body) return errorHandler(new Error('Bad request'), res);
       
@@ -25,11 +26,22 @@ module.exports  = function(router) {
           if (err) errorHandler(err, res);
           return importData(JSON.parse(data));
         });
-       
+        return;
       }
 
-      if (req.body.import) importData(JSON.parse(req.body.import));
+      let body_import = req.body.import;
 
+      console.log(body_import);
+      if ( typeof body_import  === 'string'){
+        let music_path = body_import .split('music');
+        let [artist, album ] =  music_path[1].match(/[^/]+/g); 
+        body_import = { 
+          tracks: [{path: body_import, album_title: album, artist_name: artist}],
+        };
+        importData(body_import);
+      }
+      
+    
       function importData(import_data) {
         Promise.all([
           Artist.create(import_data.artists),
