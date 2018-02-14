@@ -1,30 +1,27 @@
 
 const server = require('../../../lib/server');
 const superagent = require('superagent');
-const faker = require('faker');
-const debug = require('debug')('http:plylist-post-test');
+//const faker = require('faker');
+const debug = require('debug')('http:import-post-test');
 const tempDir = `${__dirname}/../../temp`;
 
 debug('tempDir', tempDir);
-describe('Playlist POST ', () => { 
+describe('Import POST ', () => { 
 
   this.url = `:${process.env.PORT}/api/v1`;
 
   beforeAll(server.start);
   afterAll(server.stop);
 
+  describe('import a music library', () => {
 
+    it('should import a music library', () => {
 
-  describe('upload and create a playlist', () => {
+      // let name = faker.random.word();
+      let file = `${tempDir}/import.txt`;
 
-    it('should post and create a playlist', () => {
-
-      let name = faker.random.word();
-      let file = `${tempDir}/playlist.txt`;
-
-      return superagent.post(`${this.url}/playlist`)
-        .field('name', name)
-        .attach('playlist', file) 
+      return superagent.post(`${this.url}/import`)
+        .attach('import', file) 
         .then(res => debug('res.body', res.body))
         //.then(expect(this.res.status).toBe(201))
         .catch(err => debug('err', err)); 

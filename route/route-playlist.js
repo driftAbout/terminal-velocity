@@ -9,7 +9,7 @@ const multer = require('multer');
 const tempDir = `${__dirname}/../temp`;
 const upload = multer({dest:  `${tempDir}`});
 
-//debug('tempDir', tempDir);
+debug('route-playlist');
 
 module.exports = router => {
 
@@ -19,12 +19,12 @@ module.exports = router => {
     .get(bodyParser, (req, res) => {
       if(req.params.name) {
         return Playlist.findOne({ name: `${req.params.name}` })
-          .populate('tracks')
+          \\.populate('tracks')
           .exec(function(err, playlist) {
             if(err) {console.log(err);
               return errorHandler(new Error('Item Not Found'), res);
             }console.log(playlist);
-            res.status(200).json(playlist);
+            res.status(200).json(playlist.playlist_objects);
           });
       }
     })
