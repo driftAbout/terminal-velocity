@@ -33,7 +33,7 @@ module.exports  = function(router) {
 
       console.log(body_import);
       if ( typeof body_import  === 'string'){
-        let music_path = body_import .split('music');
+        let music_path = body_import.split(/music/i);
         let [artist, album ] =  music_path[1].match(/[^/]+/g); 
         body_import = { 
           tracks: [{path: body_import, album_title: album, artist_name: artist}],
