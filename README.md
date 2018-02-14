@@ -58,11 +58,45 @@ Terminal velocity music player that you can store playlists to save to a databas
 
 ### Tree structure
 
-[PROJECT TREE STRUCTURE WILL GO HERE]
+Terminal Velocity
+├── index.js
+├── lib
+│   ├── collection.js
+│   ├── error-handler.js
+│   ├── queue.js
+│   ├── server.js
+│   ├── song-player.js
+│   └── stack.js
+├── LICENSE
+├── model
+│   ├── album.js
+│   ├── artist.js
+│   ├── playlist.js
+│   └── track.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── __test__
+    ├── integration-tests
+    │   ├── playlist
+    │   │   └── playlist-get.test.js
+    │   └── track
+    │       └── track-get.test.js
+    ├── lib
+    │   └── jest-setup.js
+    └── unit-tests
+        └── song-player.test.js
+
 
 ## Routes
 
-api/v1/play/:category/:id?
+*GET ROUTES*
+api/v1/play/track/:artist/:album/:trackname
+api/v1/play/album/:artist/:album
+api/v1/play/artist/:artist
+
+*POST ROUTES*
+api/v1/import (obj or file)
 
 
 ## Stretch goals
