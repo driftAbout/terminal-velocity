@@ -35,8 +35,9 @@ module.exports = function (router) {
       if(req.params.title){
         return Track.findOne({ 'title': req.params.title }, function (err, trackObj) {
           if(err){
-            return errorHandler(err);
+            return errorHandler(err, res);
           }
+console.log(trackObj);
           res.status(200).json(trackObj);
           });
       }

@@ -1,4 +1,4 @@
-'use strict';
+/*'use strict';
 
 const mongoose = require('mongoose');
 const Artist = require('./artist');
@@ -42,3 +42,4 @@ Album.post('remove', function(album, next){
 
 
 module.exports = mongoose.model('album', Album);
+*/
