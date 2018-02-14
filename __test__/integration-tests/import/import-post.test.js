@@ -26,4 +26,16 @@ describe('Import POST ', () => {
     });
   });
 
+  describe('import a music track', () => {
+
+    it.only('should import a music library', () => {
+      let path = '/Users/driftabout/music/Artist_02/11_Album/Track_4984.mp3';
+      return superagent.post(`${this.url}/import`)
+        .field('import', path) 
+        .then(res => debug('res.body', res.body))
+        .catch(err => debug('err', err)); 
+      
+    });
+  });
+
 });
