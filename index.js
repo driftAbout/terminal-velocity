@@ -1,3 +1,6 @@
 'use strict';
 
-const songplayer = require('./lib/song-player');
+const server = require('./lib/server');
+const songPlayer = require('./lib/song-player');
+server.start();
+

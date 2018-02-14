@@ -1,39 +1,18 @@
-
-/*'use strict';
-
-const faker = require('faker');
-const Track = require('../../model/track');
-
-
-const mock = module.exports = {};
-
-// Mock track - Create one
-mock.track = {};
-
-mock.track.createOne = () => {
-
-  return new Track({
-    path: 'music/artist/album/title.mp3',
-    album_title: faker.lorem.word(),
-    artist_name: faker.name.firstName(),
-  }).save();
-
-};
-*/
-
-use strict'; 
+'use strict'; 
 
 const  server = require('../../lib/server');
 const  Artist = require('../../model/artist');
 const  Album = require('../../model/album');
 const  Track = require('../../model/track');
 const debug = require('debug')('http:mock_data_test');
-const tempDir = `${__dirname}/../temp`;
 require('jest');
 
-const mock = module.exports = {}
+describe('data model test', () => {
+  beforeAll(server.start);
+  afterAll(server.stop);
+
   
-  this.mock.music_data = {
+  this.music_data = {
     artists: [{name: 'Artist_01'},{name: 'Artist_02'},{name: 'Artist_03'}],
     albums: [{title: '10_Album', artist_name: 'Artist_01'},{title: '11_Album', artist_name: 'Artist_02'},{title: '12_Album', artist_name: 'Artist_03'}],
     tracks: [{artist_name: 'Artist_01', album_title: '10_Album', path:  '/Users/driftabout/music/Artist_01/10_Album/Track_3817.mp3' },
@@ -66,33 +45,74 @@ const mock = module.exports = {}
     ],
   };
 
-
-
-this.mock.import_data = () => {
+  beforeAll(() => {
     return Promise.all([
-      Artist.create(this.mock.music_data.artists),
-      Album.create(this.mock.music_data.albums),
-      Track.create(this.mock.music_data.tracks),
+      Artist.create(this.music_data.artists),
+      Album.create(this.music_data.albums),
+      Track.create(this.music_data.tracks),
     ]);
-  }
+  });
     
-  this.mock.remove_Artist_data = () => {
-    return Promise.all([
-      Artist.remove(),
-    ]);
-  }
+   
+  
 
-  this.mock.remove_Album_data = () => {
-    return Promise.all([
-      Album.remove(),
-    ]);
-  }
+  debug('Mock Data Test');
 
-  this.mock.remove_Track_data = () => {
-    return Promise.all([
-      Track.remove(),
-    ]);
-  }
+  describe('find artist', () => {
+  
+    it('should create a new artist', () => {
+      return Artist.find({name: this.music_data.artists[0].name})
+        .then(artist => {
+          debug('artist', artist);
+          expect(artist.name).toEqual(this.music_data.artists[0].name);
+        })
+        .catch(err => debug('Artist error:', err));
+    });
 
-  this.mock.playlist_import_file = `${tempDir}/playlist.txt`;
-  this.mock._music_import_file = `${tempDir}/import.txt`;
+  });
+
+  describe('find album', () => {
+   
+    it('should create a new album', () => {
+      return Album.find({title: this.music_data.albums[0].title, artist_name: this.music_data.albums[0].artist_name})
+        .then(album => {
+          debug('album', album);
+          expect(album.title).toEqual(this.music_data.albums[0].title);
+        })
+        .catch(console.error);
+    });
+
+  });
+
+
+  describe('find and populate artist', () => {
+
+    beforeAll(() =>{
+      Artist.findOne({name: this.music_data.artists[0].name})
+        .populate({
+          path: 'album_ids',
+          model: 'album',
+          populate: { 
+            path: 'track_ids',
+            model: 'track',
+          },
+        })
+        .then(artist => {
+          debug('artist_pop', JSON.stringify(artist));
+        })
+        .catch(console.error);
+    });
+
+    it('should create a new album', () => {
+      return  Track.find({path:  this.music_data.tracks[0].path})
+        .populate('album_id')
+        .then(track => {
+          debug('track_pop', track);
+          expect(track.path).toEqual(this.track_1.path);
+        })
+        .catch(console.error);
+    });
+
+  });
+
+});
