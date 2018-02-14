@@ -22,9 +22,9 @@
 
 **_Version_**: 1.0.0
 
-**_Libraries_**: mpg123
+**_Libraries_**: debug, faker, jest, body-parser, cors, dotenv, eslint, express, mongoose, mpg123, superagent
 
-**_Last modified_**: 2/12/2018
+**_Last modified_**: 2/14/2018
 
 ## About the app
 
@@ -35,8 +35,20 @@ Terminal velocity music player that you can store playlists to save to a databas
 **NOTE**: To use this player you will need to install mpg123
 *For install instructions on mpg123, please visit*: https://www.npmjs.com/package/mpg123
 
- 1. Install mpg123
- 2. Install project dependencies
+ 1. Open new terminal window to be used for the music player (will take up command line listener while playing)
+ 2. Install mpg123 
+ 3. Install project dependencies
+ 4. Use the following commands to control your music:
+
+
+		-	play (path) - [Plays a file given a path]
+		-	import (path) - [imports a library given the folder structure Artist >> Album >> Track.mp3]
+		-	pause - [Pauses current song]
+		-	resume - [Resumes current song]
+		-	volume up [Increases volume 20% if possible]
+		-	volume down [Decreases volume 20% if possible]
+		-	track info [Gets information on track in the terminal]
+ 		-	help or ? [Displays a list of commands]
 
 ## Tests
 
