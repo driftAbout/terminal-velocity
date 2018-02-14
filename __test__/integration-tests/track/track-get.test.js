@@ -7,20 +7,24 @@ const superagent = require('superagent');
 const faker = require('faker');
 const mock = require('../../lib/mock');
 const server = require('../../../lib/server');
+const mongoose = require('mongoose');
+const MONGODB_URI = process.env.MONGODB_URI;
 
 
 describe('GET /api/v1/play/track/:name?', () => { 
   
   beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
-  afterAll(() => server.stop());
+//  beforeAll(() => mongoose.connect(MONGODB_URI));
   afterAll(() => mock.track.removeAll());
+  afterAll(() => server.stop());
+//  afterAll(() => mongoose.disconnect());
   
   
   describe('Valid request', () => {
 
     beforeAll(() => {
       return mock.track.createOne()
-        .then(track => this.mockTrack = track);
+        .then(track => {console.log(track);this.mockTrack = track});
     });
 
     test(
@@ -49,10 +53,10 @@ describe('GET /api/v1/play/track/:name?', () => {
       'should throw an error 404 if passing track name does not exist',
       () => {
         return superagent.get(`:${PORT}/api/v1/play/track/nonexisting`)
-          .catch(err => 
+          .catch(err => {
             expect(err.status).tobe(404);
             expect(err.message).toEqual('Item Not Found');
-          );
+          });
       });
 
   });

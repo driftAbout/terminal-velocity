@@ -1,6 +1,6 @@
 'use strict';
 
-const Track = require('');
+const Track = require('../model/track');
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const debug = require('debug')('http:route-play');
@@ -9,7 +9,7 @@ var mpg = require('mpg123');
 
 module.exports = function (router) {
 
-  router.route('api/v1/play/artist/:name?')       // artist
+/*  router.route('api/v1/play/artist/:name?')       // artist
 
     .get(bodyParser, (req, res) => {
       if(Artist.find({artist} === request)) {
@@ -30,20 +30,16 @@ module.exports = function (router) {
           .catch(err => errorHandler(err, res));
       }
     })
-
-  router.route('api/v1/play/track/:title?')   // track
-    .get((req, res) => {
-      let songPath = './music/1.mp3';
-      let request = '';
-      let track = songPath.split('/').pop();
-    
-      if(request === songPath) { 
-        return Track.findById(req.params._id)
+*/
+  router.route('/play/track/:title?')   // track
+    .get(bodyParser, (req, res) => {
+      if(req.params.title){
+        return Track.findOne()
           .then(track => res.status(200).json(track))
           .catch(err => errorHandler(err, res));
       }
     })
-
+/*
   router.route('api/v1/play/:type/:_id?')      // id
     .get((req, res) => {
       let request = '';
@@ -52,5 +48,5 @@ module.exports = function (router) {
           .then(track => res.status(200).json(track))
           .catch(err => errorHandler(err, res));
       }
-    })
+    })*/
 }
