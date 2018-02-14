@@ -16,7 +16,7 @@ mock.track.createOne = () => {
 
   let track = new Track({
     path: faker.lorem.words(5),
-    title: faker.lorem.words(2),
+    title: faker.lorem.word(),
   });
 
   let album = new Album({
@@ -29,24 +29,20 @@ mock.track.createOne = () => {
   });
   artist.album_ids.push(album);
 
-  artist.save()
+  return Promise.all([artist.save()
     .then(artist => {
       album.artist_name = artist.name;
       album.artist_id = artist._id;
-      album.save()
-        .catch(err => console.log(err))
-        .then(album => {console.log(album);
+      return album.save()
+        .then(album => {
           track.album_title = album.title;
           track.album_id = album._id;
-          track
-            .save()
-            .then(track => {
-console.log(track);
-              return track;
-            })
+//          console.log(track);
+          track.save();
+          return track;
         })
     })
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))]);
 };
 
 mock.track.removeAll = () => Promise.all([Track.remove()]);

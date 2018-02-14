@@ -11,37 +11,36 @@ const mongoose = require('mongoose');
 const MONGODB_URI = process.env.MONGODB_URI;
 
 
-describe('GET /api/v1/play/track/:name?', () => { 
+describe('GET /api/v1/play/track/:title?', () => { 
   
   beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
-//  beforeAll(() => mongoose.connect(MONGODB_URI));
-  afterAll(() => mock.track.removeAll());
   afterAll(() => server.stop());
-//  afterAll(() => mongoose.disconnect());
+  afterAll(() => mock.track.removeAll());
   
   
   describe('Valid request', () => {
 
-    beforeAll(() => {
+    beforeEach(() => {
       return mock.track.createOne()
-        .then(track => {console.log(track);this.mockTrack = track});
+        .then(track => this.mockTrack = track[0]);
     });
 
     test(
       'should respond with http res status 200',
       () => {
-        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.name}`)
+        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.title}`)
           .then(res =>
             expect(res.status).toBe(200)
-          );
+          )
+          .catch(err => console.log(err));
       });
 
     test(
-      'should return a file path for a requested track',
+      'should return a track obj for a requested track',
       () => {
-        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.name}`)
-          .then(res =>
-            expect(res.body.path).toEqual(this.mockTrack.path)
+        return superagent.get(`:${PORT}/api/v1/play/track/${this.mockTrack.title}`)
+          .then(res =>{ console.log(res);
+            expect(res.body).toEqual(this.mockTrack);}
           );
       });
 

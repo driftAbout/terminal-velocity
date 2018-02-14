@@ -5,7 +5,6 @@ const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const debug = require('debug')('http:route-play');
 
-var mpg = require('mpg123');
 
 module.exports = function (router) {
 
@@ -34,11 +33,14 @@ module.exports = function (router) {
   router.route('/play/track/:title?')   // track
     .get(bodyParser, (req, res) => {
       if(req.params.title){
-        return Track.findOne()
-          .then(track => res.status(200).json(track))
-          .catch(err => errorHandler(err, res));
+        return Track.findOne({ 'title': req.params.title }, function (err, trackObj) {
+          if(err){
+            return errorHandler(err);
+          }
+          res.status(200).json(trackObj);
+          });
       }
-    })
+    });
 /*
   router.route('api/v1/play/:type/:_id?')      // id
     .get((req, res) => {
