@@ -2,6 +2,7 @@
 'use strict';
 
 const songPlayer = require('./lib/song-player');
+const collectionGen = require('./lib/jeremycollection');
 
 
 //collection.import needs to return structure:
