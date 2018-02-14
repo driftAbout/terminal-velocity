@@ -7,34 +7,50 @@ const superagent = require('superagent');
 const faker = require('faker');
 const mock = require('../../lib/mock');
 const server = require('../../../lib/server');
+const Track = require('../../../model/track');
+const Album = require('../../../model/album');
+const Artist = require('../../../model/artist');
+//const mongoose = require('mongoose');
+//const MONGODB_URI = process.env.MONGODB_URI;
 
 
-describe('GET /api/v1/play/:_id', () => { 
+describe('GET /api/v1/play/track/:title?', () => { 
   
   beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
   afterAll(() => server.stop());
-  afterAll(() => mock.track.removeAll());
+  afterAll(() => Track.remove());
+  afterAll(() => Album.remove());
+  afterAll(() => Artist.remove());
   
   
   describe('Valid request', () => {
 
-    beforeAll(() => {
-      return mock.track.createOne()
-        .then(track => this.mockTrack = track);
-    });
-
     test(
       'should respond with http res status 200',
       () => {
-        return superagent.get(`:${PORT}/api/v1/play/${this.mockTrack._id}`)
-          .then(res =>
-            expect(res.status).toBe(200)
-          );
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/${mockTrack.title}`)
+              .then(res =>
+                expect(res.status).toBe(200)
+              )
+          })
       });
 
     test(
-      'should return a file path for a requested track',
+      'should return a track obj for a requested track',
       () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/${mockTrack.title}`)
+              .then(res =>
+                expect(res.body._id).toEqual(mockTrack._id.toString())
+              )
+          })
       });
 
   });
@@ -42,19 +58,49 @@ describe('GET /api/v1/play/:_id', () => {
   describe('Invalid request', () => {
 
     test(
-      'should throw an error 404 if passing id does not exist',
+      'should throw an error 404 if passing track name does not exist',
       () => {
-      });
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/nonexisting`)
+              .catch(err => {
+                expect(err.status).tobe(404);
+                expect(err.message).toEqual('Item Not Found');
+              });
+        });
+    });
+/*
+    test(
+      'should throw an error 404 if track title is not passed',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}`)
+              .catch(err => {
+                expect(err.status).tobe(404);
+                expect(err.message).toEqual('Item Not Found');
+              });
+        });
+    });
 
     test(
-      '',
+      'should throw an error 404 if passing track name does not exist',
       () => {
-      });
-
-    test(
-      '',
-      () => {
-      });
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/nonexisting`)
+              .catch(err => {
+                expect(err.status).tobe(404);
+                expect(err.message).toEqual('Item Not Found');
+              });
+        });
+    });
+*/
   });
-
 });
