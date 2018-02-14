@@ -45,20 +45,6 @@ describe('data model test', () => {
     ],
   };
 
-  // this.music_data.artists.forEach(artist => new Artist(artist).save());
-  // this.music_data.albums.forEach(album => new Album(album).save());
-  // this.music_data.tracks.forEach(track => new Track(track).save());
-  // beforeAll(() => {
-  //   return Artist.create(this.music_data.artists);
-  // });
-  // beforeAll(() => {
-  //   return  Album.create(this.music_data.albums);
-  // });
-
-  // beforeAll(() => {
-  //   return   Track.create(this.music_data.tracks);
-  // });
-
   beforeAll(() => {
     return Promise.all([
       Artist.create(this.music_data.artists),
@@ -68,8 +54,6 @@ describe('data model test', () => {
   });
     
    
-   
-
   
 
   debug('Mock Data Test');

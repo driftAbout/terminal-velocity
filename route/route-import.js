@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const Track = require('../model/track');
-const Playlist = require('../model/playlist');
 const Artist = require('../model/playlist');
 const Album = require('../model/album');
 const fs = require('fs');

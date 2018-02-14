@@ -14,7 +14,6 @@ describe('Playlist POST ', () => {
   afterAll(server.stop);
 
 
-
   describe('upload and create a playlist', () => {
 
     it('should post and create a playlist', () => {
@@ -26,7 +25,6 @@ describe('Playlist POST ', () => {
         .field('name', name)
         .attach('playlist', file) 
         .then(res => debug('res.body', res.body))
-        //.then(expect(this.res.status).toBe(201))
         .catch(err => debug('err', err)); 
       
     });

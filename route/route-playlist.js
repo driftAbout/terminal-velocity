@@ -2,7 +2,6 @@
 
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
-const Track = require('../model/track');
 const Playlist = require('../model/playlist');
 const debug = require('debug')('http:route-playlist');
 const multer = require('multer');
@@ -13,19 +12,16 @@ debug('route-playlist');
 
 module.exports = router => {
 
-  //router.route('/play/playlist/:name?')
   router.route('/playlist/:name?')
 
     .get(bodyParser, (req, res) => {
       if(req.params.name) {
         return Playlist.findOne({ name: `${req.params.name}` })
-          \\.populate('tracks')
-          .exec(function(err, playlist) {
-            if(err) {console.log(err);
-              return errorHandler(new Error('Item Not Found'), res);
-            }console.log(playlist);
+          .then(playlist => {
+            if(!playlist) return Promise.reject(new Error('Item Not Found'));
             res.status(200).json(playlist.playlist_objects);
-          });
+          })
+          .catch(err =>errorHandler(err, res));
       }
     })
 
