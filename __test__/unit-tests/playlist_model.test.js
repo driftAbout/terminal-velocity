@@ -23,8 +23,8 @@ describe('Playlist model test', () => {
     it('should parse a file and make a playlist', () => {
       return  Playlist.parse_playlist(this.req)
         .then(playlist => {
-          debug('playlist', JSON.stringify(playlist));
-         // new Playlist(playlist).save();
+          //debug('playlist', JSON.stringify(playlist));
+          new Playlist(playlist).save();
           expect(true).toBe(true);
         })
         .catch(console.error);
