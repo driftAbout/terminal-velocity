@@ -2,8 +2,8 @@
 
 const fs = require('fs');
 const Track = require('./track');
-const Artist = require('./track');
-const Album = require('./track');
+const Artist = require('./artist');
+const Album = require('./album');
 const mongoose = require('mongoose');
 
 const tempArray = [];
