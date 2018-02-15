@@ -1,13 +1,9 @@
-/*'use strict';
-
-
 'use strict';
 
-const  server = require('../../lib/server');
+//const  server = require('../../lib/server');
 const  Artist = require('../../model/artist');
 const  Album = require('../../model/album');
 const  Track = require('../../model/track');
-
 const faker = require('faker');
 const debug = require('debug')('http:mock');
 const tempDir = `${__dirname}/../temp`;
@@ -28,10 +24,6 @@ mock.track.createOne = () => {
   }).save();
 
 };
-*/
-
-
-'use strict'; 
 
 mock.music_data = {
   artists: [{name: 'Artist_01'},{name: 'Artist_02'},{name: 'Artist_03'}],
@@ -65,7 +57,6 @@ mock.music_data = {
     {artist_name: 'Artist_03', album_title: '12_Album', path: '/Users/driftabout/music/Artist_03/12_Album/Track_5952.mp3' },
   ],
 };
-
 
 mock.import_data = () => {
   return Promise.all([
@@ -101,7 +92,5 @@ mock.remove_Track_data = () => {
   ]);
 };
 
-mock.playlist_import_file = `${tempDir}/playlist.txt`;
+mock.playlist_import_data = {name: faker.random.word(), file: `${tempDir}/playlist.txt`};
 mock._music_import_file = `${tempDir}/import.txt`;
-
-
