@@ -10,8 +10,6 @@ const server = require('../../../lib/server');
 const Track = require('../../../model/track');
 const Album = require('../../../model/album');
 const Artist = require('../../../model/artist');
-//const mongoose = require('mongoose');
-//const MONGODB_URI = process.env.MONGODB_URI;
 
 
 describe('GET /api/v1/play/track/:title?', () => { 
@@ -35,8 +33,8 @@ describe('GET /api/v1/play/track/:title?', () => {
             return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/${mockTrack.title}`)
               .then(res =>
                 expect(res.status).toBe(200)
-              )
-          })
+              );
+          });
       });
 
     test(
@@ -49,8 +47,8 @@ describe('GET /api/v1/play/track/:title?', () => {
             return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/${mockTrack.title}`)
               .then(res =>
                 expect(res.body._id).toEqual(mockTrack._id.toString())
-              )
-          })
+              );
+          });
       });
 
   });
@@ -69,8 +67,8 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).tobe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
-        });
-    });
+          });
+      });
 /*
     test(
       'should throw an error 404 if track title is not passed',
@@ -86,21 +84,21 @@ describe('GET /api/v1/play/track/:title?', () => {
               });
         });
     });
-
+*/
     test(
-      'should throw an error 404 if passing track name does not exist',
+      'should throw an error 404 if passing album title does not exist',
       () => {
         let mockTrack;
         return mock.track.createOne()
           .then(track => {
             mockTrack = track;
-            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/nonexisting`)
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/nonexisting}/${mockTrack.title}`)
               .catch(err => {
                 expect(err.status).tobe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
         });
     });
-*/
+
   });
 });

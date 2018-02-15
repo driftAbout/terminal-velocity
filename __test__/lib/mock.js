@@ -1,5 +1,5 @@
 
-/*'use strict';
+'use strict';
 
 const faker = require('faker');
 const Track = require('../../model/track');
@@ -19,9 +19,9 @@ mock.track.createOne = () => {
   }).save();
 
 };
-*/
 
-use strict'; 
+/*
+'use strict'; 
 
 const  server = require('../../lib/server');
 const  Artist = require('../../model/artist');
@@ -96,3 +96,5 @@ this.mock.import_data = () => {
 
   this.mock.playlist_import_file = `${tempDir}/playlist.txt`;
   this.mock._music_import_file = `${tempDir}/import.txt`;
+
+*/

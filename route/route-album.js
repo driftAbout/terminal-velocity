@@ -37,9 +37,9 @@ module.exports = function (router) {
           if(err){
             return errorHandler(err, res);
           }
-console.log(trackObj);
+          console.log(trackObj);
           res.status(200).json(trackObj);
-          });
+        });
       }
     });
 /*
@@ -52,4 +52,4 @@ console.log(trackObj);
           .catch(err => errorHandler(err, res));
       }
     })*/
-}
+};
