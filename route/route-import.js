@@ -19,29 +19,27 @@ module.exports  = function(router) {
 
   router.route('/import')
     .post(bodyParser, upload.single('import'), (req, res) => {
-      if (!req.body.import && !req.file.path) return errorHandler(new Error('Bad request'), res);
-      
       if (req.file) {
         fs.readFile(req.file.path, 'utf8', (err, data) => {
-          if (err) errorHandler(err, res);
+          if (err) return errorHandler(err, res);
           del(`${tempDir}/${req.file.filename}`);
           return importData(JSON.parse(data));
         });
         return;
       }
-
+      
       let body_import = req.body.import;
-
-      if ( typeof body_import  === 'string'){
+      if ( body_import.toLowerCase().includes('music')){
         let music_path = body_import.split(/music/i);
-        if (music_path.length < 2) return errorHandler(new Error('Bad request'), res);
         let [artist, album ] =  music_path[1].match(/[^/]+/g); 
         body_import = { 
           tracks: [{path: body_import, album_title: album, artist_name: artist}],
         };
         importData(body_import);
+        return;
       }
-      
+
+      return errorHandler(new Error('Bad request'), res);
     
       function importData(import_data) {
         Promise.all([
