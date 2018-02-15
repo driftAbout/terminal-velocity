@@ -12,7 +12,7 @@ const tempDir = `${__dirname}/../temp`;
 debug('playlist model');
 
 const Playlist = mongoose.Schema({
-  name: {type: String, required: true},
+  name: {type: String, required: true, unique: true},
   playlist_objects: [{type: Array}],
 },
 {timestamps: true}

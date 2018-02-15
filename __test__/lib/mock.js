@@ -92,6 +92,6 @@ mock.remove_Track_data = () => {
   ]);
 };
 
-mock.playlist_import_file = `${tempDir}/playlist.txt`;
+mock.playlist_import_data = {name: faker.random.word(), file: `${tempDir}/playlist.txt`};
 mock._music_import_file = `${tempDir}/import.txt`;
 

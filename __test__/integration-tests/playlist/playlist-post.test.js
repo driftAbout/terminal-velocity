@@ -1,7 +1,7 @@
 
 const server = require('../../../lib/server');
 const superagent = require('superagent');
-const faker = require('faker');
+const mock= require('../../lib/mock');
 const debug = require('debug')('http:plylist-post-test');
 const tempDir = `${__dirname}/../../temp`;
 
@@ -12,14 +12,18 @@ describe('Playlist POST ', () => {
 
   beforeAll(server.start);
   afterAll(server.stop);
+  beforeAll(mock.import_data);
+  //afterAll(mock.remove_all_data);
+
 
 
   describe('upload and create a playlist', () => {
 
     it('should post and create a playlist', () => {
 
-      let name = faker.random.word();
-      let file = `${tempDir}/playlist.txt`;
+      let {name, file} = mock.playlist_import_data;
+
+      file = '/Users/driftabout/Desktop/playlist.txt';
 
       return superagent.post(`${this.url}/playlist`)
         .field('name', name)
