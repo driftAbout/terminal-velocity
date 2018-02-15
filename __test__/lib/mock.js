@@ -10,13 +10,14 @@ const  Track = require('../../model/track');
 
 const faker = require('faker');
 const debug = require('debug')('http:mock');
-const tempDir = `${__dirname}/../temp`;
+*/
+/*
 require('jest');
 
 debug('mock');
-
+*/
+/*
 const mock = module.exports = {};
-
 mock.track = {};
 
 mock.track.createOne = () => {
@@ -32,6 +33,10 @@ mock.track.createOne = () => {
 
 
 'use strict'; 
+
+const tempDir = `${__dirname}/../temp`;
+
+const mock = module.exports = {};
 
 mock.music_data = {
   artists: [{name: 'Artist_01'},{name: 'Artist_02'},{name: 'Artist_03'}],
