@@ -20,7 +20,7 @@ describe('Artist module', function () {
         .then(artist => {
           console.log(artist);
           done();
-        })
+        });
     });
 
   });
