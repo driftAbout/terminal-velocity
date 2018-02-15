@@ -6,9 +6,9 @@ const debug = require('debug')('http:album-model');
 
 const Album = mongoose.Schema({
   title: {type: String, required: true},
-  track_ids: [{type: mongoose.Schema.Types.ObjectId, ref: 'track'}],
+  //track_ids: [{type: mongoose.Schema.Types.ObjectId, ref: 'track'}],
   artist_name: {type: String},
-  artist_id: {type: mongoose.Schema.Types.ObjectId, ref: 'artist'},  
+  //artist_id: {type: mongoose.Schema.Types.ObjectId, ref: 'artist'},  
 },
 {timestamps: true}
 );

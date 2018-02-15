@@ -1,37 +1,43 @@
 'use strict';
 
-const faker = require('faker');
-const Artist = require('../../../model/artist');
-//const mock = require('../../lib/mock');
 const path = require('path');
 require('dotenv').config({path: path.resolve(process.cwd(), '__test__/.test.env')});
+const PORT = process.env.PORT;
+const superagent = require('superagent');
+const faker = require('faker');
+const mock = require('../../lib/mock');
+const server = require('../../../lib/server');
+const Track = require('../../../model/track');
+const Album = require('../../../model/album');
+const Artist = require('../../../model/artist');
 
 
-
-describe('Artist module', function () {
-
+describe('Artist module', () => { 
+  
+  beforeAll(() => server.start(PORT, () => console.log(`Listening on ${PORT}`)));
+  afterAll(() => server.stop());
+  afterAll(() => Track.remove());
+  afterAll(() => Album.remove());
   afterAll(() => Artist.remove());
+  
+  
+  describe('Valid request', () => {
 
-  describe('Valid input', () => {
-
-    test('Create an artist model', (done) => {
-      new Artist({name: 'name'})
-        .save()
-        .then(artist => {
-          console.log(artist);
-          done();
-        });
-    });
+    test(
+      'should create a data in mongoDB',
+      () => {
+        let a;
+        return new Artist({
+          name: faker.name.firstName(),
+        }).save()
+          .then(artist => {
+            a = artist;
+            return Artist.findOne(artist._id)
+              .then(artist => {
+                expect(artist.name).toEqual(a.name);
+              })
+          })
+      });
 
   });
-/*
-  describe('Invalid input', () => {
-
-    test.skip('throws an error if empty string for name', () => {
-      new Artist('')
-        .catch(err => expect(err.message).toBe('Validation Error. Name required.'));
-    });
-
-  });
-*/
 });
