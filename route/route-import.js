@@ -1,3 +1,5 @@
+'use strict';
+
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const Track = require('../model/track');
@@ -16,11 +18,8 @@ module.exports  = function(router) {
 
   router.route('/import')
     .post(bodyParser, upload.single('import'), (req, res) => {
-      console.log(req.body);
-      //if (!req.file) return errorHandler(new Error('Multi-part form data error: Missing file'), res);
       if (!req.body.import && !req.body) return errorHandler(new Error('Bad request'), res);
       
-      //let import_data = req.body.import;
       if (req.file) {
         fs.readFile(req.file.path, 'utf8', (err, data) => {
           if (err) errorHandler(err, res);
@@ -31,7 +30,6 @@ module.exports  = function(router) {
 
       let body_import = req.body.import;
 
-      console.log(body_import);
       if ( typeof body_import  === 'string'){
         let music_path = body_import.split(/music/i);
         let [artist, album ] =  music_path[1].match(/[^/]+/g); 

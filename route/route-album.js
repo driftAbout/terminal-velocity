@@ -1,9 +1,10 @@
 'use strict';
 
 const Track = require('../model/track');
-const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
-const debug = require('debug')('http:route-play');
+const debug = require('debug')('http:route-album');
+
+debug('route-album');
 
 module.exports = function (router) {
 
