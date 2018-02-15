@@ -14,8 +14,15 @@ debug('route-track');
 module.exports = router => {
 
   router.route('/play/track/:artist?/:album?/:title?')
-
-    .get(bodyParser, (req, res) => {
+/*.get((req, res) => {
+ 12       return Track.find({artist_name: req.param.artist})
+ 13         .then(tracks => {
+ 14           if (!tracks) return Promise.reject(new Error('Error: ENOENT:  Not Found'));
+ 15           res.status(200).json(tracks);
+ 16         })
+ 17         .catch(err => errorHandler(err, res));
+ 18     });
+*/    .get(bodyParser, (req, res) => {
       if(req.params.artist && req.params.album && req.params.title) {
         return Track.findOne({
           artist_name: `${req.params.artist}`, 
@@ -24,10 +31,12 @@ module.exports = router => {
         })
           .exec(function(err, track) {
             if(err) {
-              return errorHandler(new Error('Item Not Found'), res);
+              return errorHandler(new Error('ENOENT: Item not found'), res);
             }
             res.status(200).json(track);
           });
+      }else{
+        return errorHandler(new Error('Bad request'), res);
       }
     });
 

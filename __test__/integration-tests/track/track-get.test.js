@@ -64,27 +64,12 @@ describe('GET /api/v1/play/track/:title?', () => {
             mockTrack = track;
             return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}/nonexisting`)
               .catch(err => {
-                expect(err.status).tobe(404);
+                expect(err.status).toBe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
           });
       });
-/*
-    test(
-      'should throw an error 404 if track title is not passed',
-      () => {
-        let mockTrack;
-        return mock.track.createOne()
-          .then(track => {
-            mockTrack = track;
-            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}`)
-              .catch(err => {
-                expect(err.status).tobe(404);
-                expect(err.message).toEqual('Item Not Found');
-              });
-        });
-    });
-*/
+
     test(
       'should throw an error 404 if passing album title does not exist',
       () => {
@@ -92,13 +77,88 @@ describe('GET /api/v1/play/track/:title?', () => {
         return mock.track.createOne()
           .then(track => {
             mockTrack = track;
-            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/nonexisting}/${mockTrack.title}`)
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/nonexisting/${mockTrack.title}`)
               .catch(err => {
-                expect(err.status).tobe(404);
+                expect(err.status).toBe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
         });
     });
 
+    test(
+      'should throw an error 404 if passing artist name does not exist',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/nonexisting/${mockTrack.album_title}/${mockTrack.title}`)
+              .catch(err => {
+                expect(err.status).toBe(404);
+                expect(err.message).toEqual('Item Not Found');
+              });
+        });
+    });
+
+    test(
+      'should throw an error 400 if /track_title is not passed',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}/${mockTrack.album_title}`)
+              .catch(err => {
+                expect(err.status).toBe(400);
+                expect(err.message).toEqual('Bad Request');
+              });
+        });
+    });
+
+    test(
+      'should throw an error 400 if /album_title/track_title are not passed',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track/${mockTrack.artist_name}`)
+              .catch(err => {
+                expect(err.status).toBe(400);
+                expect(err.message).toEqual('Bad Request');
+              });
+        });
+    });
+
+    test(
+      'should throw an error 400 if /artist_name/album_title/track_title are not passed',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play/track`)
+              .catch(err => {
+                expect(err.status).toBe(400);
+                expect(err.message).toEqual('Bad Request');
+              });
+        });
+    });
+/*
+    test(
+      'should throw an error 400 if /track is not passed',
+      () => {
+        let mockTrack;
+        return mock.track.createOne()
+          .then(track => {
+            mockTrack = track;
+            return superagent.get(`:${PORT}/api/v1/play`)
+              .catch(err => {console.log(err.message);
+                expect(err.status).toBe(400);
+                expect(err.message).toEqual('Bad Request');
+              });
+        });
+    });
+*/
   });
 });
