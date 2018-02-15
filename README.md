@@ -41,8 +41,10 @@ Terminal velocity music player that you can store playlists to save to a databas
  4. Use the following commands to control your music:
 
 
-		-	play (path) - [Plays a file given a path]
-		-	import (path) - [imports a library given the folder structure Artist >> Album >> Track.mp3]
+		-	play_track [artist] [album] [name] - [Plays a file given a path]
+		-	import_track [path] - [imports a track given the folder structure Artist >> Album >> Track.mp3]
+		- create_playlist [playlist name] [path to text file with paths] - [creates a playlist with the name given from a file with a list of paths (paths can be to MP3, albums folders or artists folders)]
+		- play_playlist [playlist name] - creates a queue of the playlist songs
 		-	pause - [Pauses current song]
 		-	resume - [Resumes current song]
 		-	volume up [Increases volume 20% if possible]
@@ -59,32 +61,59 @@ Terminal velocity music player that you can store playlists to save to a databas
 ### Tree structure
 
 Terminal Velocity
+
 ├── index.js
+
 ├── lib
+
 │   ├── collection.js
+
 │   ├── error-handler.js
+
 │   ├── queue.js
+
 │   ├── server.js
+
 │   ├── song-player.js
+
 │   └── stack.js
+
 ├── LICENSE
+
 ├── model
+
 │   ├── album.js
+
 │   ├── artist.js
+
 │   ├── playlist.js
+
 │   └── track.js
+
 ├── package.json
+
 ├── package-lock.json
+
 ├── README.md
+
 └── __test__
+
     ├── integration-tests
+
     │   ├── playlist
+
     │   │   └── playlist-get.test.js
+
     │   └── track
+
     │       └── track-get.test.js
+
     ├── lib
+
     │   └── jest-setup.js
+
     └── unit-tests
+
         └── song-player.test.js
 
 

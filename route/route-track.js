@@ -21,7 +21,7 @@ module.exports = router => {
           artist_name: `${req.params.artist}`, 
           album_title: `${req.params.album}`,
           title: `${req.params.title}`,
-          })
+        })
           .exec(function(err, track) {
             if(err) {
               return errorHandler(new Error('Item Not Found'), res);
@@ -29,8 +29,7 @@ module.exports = router => {
             res.status(200).json(track);
           });
       }
-    })
-
+    });
 };
 
 /*
@@ -38,10 +37,7 @@ const Track = require('../model/track');
 const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const debug = require('debug')('http:route-play');
-
-
 module.exports = function (router) {
-
   router.route('/play/track/:artist?/:album?/:title?')   // track
     .get(bodyParser, (req, res) => {
       if(!req.params.artist || !req.params.album || !req.params.title){
