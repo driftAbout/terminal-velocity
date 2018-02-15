@@ -23,16 +23,27 @@ describe('GET /api/v1/play/artist/:artist', () => {
     test(
       'should respond with http res status 200',
       () => {
+        let a, t;
         return new Artist({
           name: faker.name.firstName(), 
         }).save()
           .then(artist => {
-            return superagent.get(`:${PORT}/api/v1/play/artist/${artist.name}`)
-              .then(res =>
-                expect(res.status).toBe(200)
-              );
+            a = artist;
+            return new Track({
+              path: 'music/artist/album/track.mp3',
+              album_title: faker.lorem.word(2),
+              artist_name: a.name,
+            }).save()
+              .then(track => {
+                t = track;
+                return superagent.get(`:${PORT}/api/v1/play/artist/${a.name}`)
+                  .then(res =>
+                    expect(res.status).toBe(200)
+                  );
+              });
           });
     });
+
     test(
       'should return a list of track objects for a requested artist',
       () => {
@@ -68,4 +79,15 @@ describe('GET /api/v1/play/artist/:artist', () => {
       });
   });
 
+  describe('Invalid request', () => {
+
+    test(
+      'should respond with http status 404 if no track exists for artist',
+      () => {
+        return superagent.get(`:${PORT}/api/v1/play/artist/nonexisting`)
+          .catch(err =>
+            expect(err.status).toBe(404)
+          );
+      });
+  });
 });
