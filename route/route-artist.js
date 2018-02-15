@@ -10,11 +10,15 @@ module.exports = router => {
   router.route('/play/artist/:artist')
 
     .get(bodyParser, (req, res) => {
-      return Track.find({artist_name: req.params.artist})
-        .then(tracks => {
-          if (!tracks) return Promise.reject(new Error('Error: ENOENT:  Not Found'));
-          res.status(200).json(tracks);
-        })
-        .catch(err => errorHandler(err, res));
+      //if(req.params.artist){
+        return Track.find({artist_name: `${req.params.artist}`})
+          .then(tracks => {
+            if (!tracks) return Promise.reject(new Error('Error: ENOENT:  Not Found'));
+            res.status(200).json(tracks);
+          })
+          .catch(err => errorHandler(err, res));
+      //}else{
+      //  return errorHandler(new Error('Bad Request'), res);
+      //}
     });
 };
