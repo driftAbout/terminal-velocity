@@ -5,7 +5,7 @@ const server = require('../../lib/server');
 
 describe('Server tests', function(){
 
-  beforeEach(() => server.start());
+  beforeAll(() => server.start());
   afterAll(() => server.stop());
 
   describe('Server errors', () => {
