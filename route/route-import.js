@@ -6,6 +6,7 @@ const Track = require('../model/track');
 const Artist = require('../model/playlist');
 const Album = require('../model/album');
 const fs = require('fs');
+const del = require('del');
 const debug = require('debug')('http:route-playlist');
 const multer = require('multer');
 const tempDir = `${__dirname}/../temp`;
@@ -18,11 +19,12 @@ module.exports  = function(router) {
 
   router.route('/import')
     .post(bodyParser, upload.single('import'), (req, res) => {
-      if (!req.body.import && !req.body) return errorHandler(new Error('Bad request'), res);
+      if (!req.body.import && !req.file.path) return errorHandler(new Error('Bad request'), res);
       
       if (req.file) {
         fs.readFile(req.file.path, 'utf8', (err, data) => {
           if (err) errorHandler(err, res);
+          del(`${tempDir}/${req.file.filename}`);
           return importData(JSON.parse(data));
         });
         return;
@@ -32,6 +34,7 @@ module.exports  = function(router) {
 
       if ( typeof body_import  === 'string'){
         let music_path = body_import.split(/music/i);
+        if (music_path.length < 2) return errorHandler(new Error('Bad request'), res);
         let [artist, album ] =  music_path[1].match(/[^/]+/g); 
         body_import = { 
           tracks: [{path: body_import, album_title: album, artist_name: artist}],

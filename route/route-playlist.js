@@ -25,7 +25,7 @@ module.exports = router => {
     })
 
     .post(bodyParser, upload.single('playlist'), (req, res) =>{
-      if(!req.file) return errorHandler(new Error('Multi-part form error: missing file'), res);
+      if (!req.file) return errorHandler(new Error('Multi-part form error: missing file'), res);
       if (!req.body.name) return errorHandler(new Error('Bad request'), res);
       return  Playlist.parse_playlist(req)
         .then(playlist =>new Playlist(playlist).save())
