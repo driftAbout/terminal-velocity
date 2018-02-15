@@ -143,21 +143,6 @@ describe('GET /api/v1/play/track/:title?', () => {
               });
           });
       });
-  /*
-    test(
-      'should throw an error 400 if /track is not passed',
-      () => {
-        let mockTrack;
-        return mock.track.createOne()
-          .then(track => {
-            mockTrack = track;
-            return superagent.get(`:${PORT}/api/v1/play`)
-              .catch(err => {console.log(err.message);
-                expect(err.status).toBe(400);
-                expect(err.message).toEqual('Bad Request');
-              });
-        });
+  
     });
-*/
-  });
 });
