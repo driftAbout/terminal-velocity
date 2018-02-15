@@ -1,12 +1,16 @@
-'use strict'; 
 
-const  server = require('../../lib/server');
+'use strict';
+
+
+//const  server = require('../../lib/server');
 const  Artist = require('../../model/artist');
 const  Album = require('../../model/album');
 const  Track = require('../../model/track');
 
+
 const tempDir = `${__dirname}/../temp`;
 
+const Playlist = require('../../model/playlist');
 const faker = require('faker');
 const debug = require('debug')('http:mock');
 
@@ -63,7 +67,6 @@ mock.music_data = {
   ],
 };
 
-
 mock.import_data = () => {
   return Promise.all([
     Artist.create(mock.music_data.artists),
@@ -77,6 +80,7 @@ mock.remove_all_data = () => {
     Artist.remove(),
     Album.remove(),
     Track.remove(),
+    Playlist.remove(),
   ]);
 };
   
@@ -98,7 +102,5 @@ mock.remove_Track_data = () => {
   ]);
 };
 
-mock.playlist_import_file = `${tempDir}/playlist.txt`;
+mock.playlist_import_data = {name: faker.random.word(), file: `${tempDir}/playlist.txt`};
 mock._music_import_file = `${tempDir}/import.txt`;
-
-

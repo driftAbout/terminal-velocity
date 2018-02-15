@@ -4,7 +4,6 @@ const path = require('path');
 require('dotenv').config({path: path.resolve(process.cwd(), '__test__/.test.env')});
 const PORT = process.env.PORT;
 const superagent = require('superagent');
-const faker = require('faker');
 const mock = require('../../lib/mock');
 const server = require('../../../lib/server');
 const Track = require('../../../model/track');
@@ -82,8 +81,8 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).toBe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
-        });
-    });
+          });
+      });
 
     test(
       'should throw an error 404 if passing artist name does not exist',
@@ -97,8 +96,8 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).toBe(404);
                 expect(err.message).toEqual('Item Not Found');
               });
-        });
-    });
+          });
+      });
 
     test(
       'should throw an error 400 if /track_title is not passed',
@@ -112,8 +111,8 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).toBe(400);
                 expect(err.message).toEqual('Bad Request');
               });
-        });
-    });
+          });
+      });
 
     test(
       'should throw an error 400 if /album_title/track_title are not passed',
@@ -127,8 +126,8 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).toBe(400);
                 expect(err.message).toEqual('Bad Request');
               });
-        });
-    });
+          });
+      });
 
     test(
       'should throw an error 400 if /artist_name/album_title/track_title are not passed',
@@ -142,9 +141,9 @@ describe('GET /api/v1/play/track/:title?', () => {
                 expect(err.status).toBe(400);
                 expect(err.message).toEqual('Bad Request');
               });
-        });
-    });
-/*
+          });
+      });
+  /*
     test(
       'should throw an error 400 if /track is not passed',
       () => {

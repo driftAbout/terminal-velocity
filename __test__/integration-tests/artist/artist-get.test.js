@@ -18,7 +18,6 @@ describe('GET /api/v1/play/artist/:artist', () => {
   afterAll(() => Track.remove());
   afterAll(() => Artist.remove());
   
-  
   describe('Valid request', () => {
 
     test(
@@ -34,7 +33,6 @@ describe('GET /api/v1/play/artist/:artist', () => {
               );
           });
     });
-
     test(
       'should return a list of track objects for a requested artist',
       () => {
@@ -68,7 +66,6 @@ describe('GET /api/v1/play/artist/:artist', () => {
               });
           });
       });
-
   });
 
 });
