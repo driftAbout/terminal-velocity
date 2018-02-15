@@ -9,7 +9,7 @@ const Track = mongoose.Schema({
   title: {type: String},
   artist_name: {type: String, required: true},
   album_title: {type: String},
-  album_id: {type: mongoose.Schema.Types.ObjectId, ref: 'album'},
+  //album_id: {type: mongoose.Schema.Types.ObjectId, ref: 'album'},
 }, {timestamps: true});
 
 debug('Track Schema');
