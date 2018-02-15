@@ -35,9 +35,9 @@ Playlist.statics.parse_playlist = (req) => {
 
 function parseText(text) {
   let lines = text.split('\n');
-
+  lines = lines.filter(line => line);
   let queries = lines.map(line => {
-    let music_path = line.split('music');
+    let music_path = line.split(/music/i);
     let [artist, album, track ] =  music_path[1].match(/[^/]+/g); 
     let track_query = {artist_name: artist};
     if (artist && album ) track_query = {album_title: album, artist_name: artist};
