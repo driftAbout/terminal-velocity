@@ -6,8 +6,6 @@ const server = require('../../../lib/server');
 const superagent = require('superagent');
 const PORT = process.env.PORT;
 const mock = require('../../lib/mock');
-const faker = require('faker');
-
 
 describe('GET /api/v1/play/artist/:name', () => { 
   
@@ -16,7 +14,6 @@ describe('GET /api/v1/play/artist/:name', () => {
   afterAll(() => mock.track.removeAll());
   afterAll(() => mock.artist.removeAll());
   
-  
   describe('Valid request', () => {
 
     beforeAll(() => {
@@ -24,7 +21,8 @@ describe('GET /api/v1/play/artist/:name', () => {
         .then(artist => {
           this.trackOne = artist.trackOne;
           this.trackTwo = artist.trackTwo;
-          this.mockArtist = artist.artist);
+          this.mockArtist = artist.artist;
+        });
     });
 
     test(
@@ -40,10 +38,10 @@ describe('GET /api/v1/play/artist/:name', () => {
       'should return a list of file paths for a requested artist',
       () => {
         return superagent.get(`:${PORT}/api/v1/play/artist/${this.mockArtist.name}`)
-          .then(res =>
+          .then(res => {
             expect(res.body.track_paths).toContain(this.trackOne.path);
             expect(res.body.track_paths).toContain(this.trackTwo.path);
-          );
+          });
       });
 
   });
@@ -55,7 +53,7 @@ describe('GET /api/v1/play/artist/:name', () => {
       () => {
         return superagent.get(`:${PORT}/api/v1/play/artist/nonexist`)
           .catch(err =>
-            expect(err.status).toBe(404);
+            expect(err.status).toBe(404)
           );
       });
 
@@ -64,7 +62,7 @@ describe('GET /api/v1/play/artist/:name', () => {
       () => {
         return superagent.get(`:${PORT}/api/v1/play`)
           .catch(err =>
-            expect(err.status).toBe(400);
+            expect(err.status).toBe(400)
           );
       });
   });

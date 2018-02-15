@@ -4,6 +4,7 @@
 const  Artist = require('../../model/artist');
 const  Album = require('../../model/album');
 const  Track = require('../../model/track');
+const Playlist = require('../../model/playlist');
 const faker = require('faker');
 const debug = require('debug')('http:mock');
 const tempDir = `${__dirname}/../temp`;
@@ -71,6 +72,7 @@ mock.remove_all_data = () => {
     Artist.remove(),
     Album.remove(),
     Track.remove(),
+    Playlist.remove(),
   ]);
 };
   

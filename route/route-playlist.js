@@ -15,23 +15,20 @@ module.exports = router => {
   router.route('/playlist/:name?')
 
     .get(bodyParser, (req, res) => {
-      if(req.params.name) {
-        return Playlist.findOne({ name: `${req.params.name}` })
-          .then(playlist => {
-            if(!playlist) return Promise.reject(new Error('Item Not Found'));
-            res.status(200).json(playlist.playlist_objects);
-          })
-          .catch(err =>errorHandler(err, res));
-      }
+      if(!req.params.name) return errorHandler(new Error('Error: Bad request'), res);
+      return Playlist.findOne({ name: `${req.params.name}` })
+        .then(playlist => {
+          if(!playlist) return Promise.reject(new Error('Error ENOENT: Item Not Found'));
+          res.status(200).json(playlist.playlist_objects);
+        })
+        .catch(err => errorHandler(err, res));
     })
 
     .post(bodyParser, upload.single('playlist'), (req, res) =>{
-      if(!req.file) return errorHandler(new Error('Multi-part form error: missing file'), res);
-      if (!req.body) return errorHandler(new Error('Bad request'), res);
+      if (!req.file) return errorHandler(new Error('Multi-part form error: missing file'), res);
+      if (!req.body.name) return errorHandler(new Error('Bad request'), res);
       return  Playlist.parse_playlist(req)
-        .then(playlist => {
-          new Playlist(playlist).save();
-        })
+        .then(playlist =>new Playlist(playlist).save())
         .then(playlist => res.status(201).json(playlist))
         .catch(err => errorHandler(err, res));
     });
