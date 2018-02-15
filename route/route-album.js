@@ -5,7 +5,6 @@ const bodyParser = require('body-parser').json();
 const errorHandler = require('../lib/error-handler');
 const debug = require('debug')('http:route-play');
 
-
 module.exports = function (router) {
 
   router.route('/play/album/:artist/:album')

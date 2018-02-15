@@ -1,9 +1,10 @@
-'use strict'; 
+'use strict';
 
 const  server = require('../../lib/server');
 const  Artist = require('../../model/artist');
 const  Album = require('../../model/album');
 const  Track = require('../../model/track');
+const faker = require('faker');
 const debug = require('debug')('http:mock');
 const tempDir = `${__dirname}/../temp`;
 require('jest');
@@ -11,6 +12,18 @@ require('jest');
 debug('mock');
 
 const mock = module.exports = {};
+
+mock.track = {};
+
+mock.track.createOne = () => {
+
+  return new Track({
+    path: 'music/artist/album/title.mp3',
+    album_title: faker.lorem.word(),
+    artist_name: faker.name.firstName(),
+  }).save();
+
+};
 
 mock.music_data = {
   artists: [{name: 'Artist_01'},{name: 'Artist_02'},{name: 'Artist_03'}],
@@ -81,3 +94,4 @@ mock.remove_Track_data = () => {
 
 mock.playlist_import_file = `${tempDir}/playlist.txt`;
 mock._music_import_file = `${tempDir}/import.txt`;
+
