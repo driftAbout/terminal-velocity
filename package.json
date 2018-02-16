@@ -1,28 +1,74 @@
 {
   "name": "terminal-velocity",
   "version": "1.0.0",
-  "description": "",
+  "description": "a terminal music player",
   "main": "index.js",
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {
-    "audio-loader": "^1.0.3",
-    "audio-play": "^2.2.0"
-  },
-  "devDependencies": {},
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:watch": "nodemon index.js",
+    "start:debug": "DEBUG=http* nodemon index.js",
+    "test": "jest -i",
+    "test:watch": "jest -i --watchAll",
+    "test:debug": "DEBUG=http* jest -i",
+    "lint": "eslint .",
+    "start-db": "mkdir -p ./data/db && mongod --dbpath ./data/db",
+    "stop-db": "killall mongod"
+  },
+  "jest": {
+    "setupFiles": [
+      "./__test__/lib/jest-setup.js"
+    ],
+    "verbose": true,
+    "testEnvironment": "node",
+    "collectCoverage": true,
+    "coverageDirectory": "./coverage",
+    "coveragePathIgnorePatterns": [
+      "/__test__/"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jordanwvn/terminal-velocity.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "terminal",
+    "music",
+    "player",
+    "velocity"
+  ],
+  "author": "Jamie Williams, Kevin Miller, Jeremy Pearson, Rima Hiraoka, Jordan Van Ness",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Jordanwvn/terminal-velocity/issues"
   },
-  "homepage": "https://github.com/Jordanwvn/terminal-velocity#readme"
+  "homepage": "https://github.com/Jordanwvn/terminal-velocity#readme",
+  "devDependencies": {
+    "debug": "^3.1.0",
+    "faker": "^4.1.0",
+    "jest": "^22.3.0",
+    "multer": "^1.3.0"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "del": "^3.0.0",
+    "dotenv": "^5.0.0",
+    "eslint": "^4.17.0",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.4",
+    "mpg123": "^0.2.3",
+    "superagent": "^3.8.2"
+  }
 }

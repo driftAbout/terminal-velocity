@@ -1,6 +1,7 @@
 'use strict';
 
-const play = require('audio-play');
-const load = require('audio-loader');
+const server = require('./lib/server');
+const songPlayer = require('./lib/song-player');
 
-load(`./music/1.mp3`).then(play);
+server.start();
+
