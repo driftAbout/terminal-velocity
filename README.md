@@ -12,6 +12,7 @@
 
 [![Build Status](https://travis-ci.org/Jordanwvn/terminal-velocity.svg?branch=master)](https://travis-ci.org/Jordanwvn/terminal-velocity)
 
+[NPM PACKAGE](https://www.npmjs.com/package/terminal-velocity)
 ## General information
 **_Authors_**:
 * Jeremy Pearson: https://github.com/jpjazzy
