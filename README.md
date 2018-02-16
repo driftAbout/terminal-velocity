@@ -10,7 +10,7 @@
 	                                                                                                                       /\___/
 	                                                                                                                       \/__/
 
-[BADGES HERE]
+[![Build Status](https://travis-ci.org/Jordanwvn/terminal-velocity.svg?branch=master)](https://travis-ci.org/Jordanwvn/terminal-velocity)
 
 ## General information
 **_Authors_**:
@@ -183,3 +183,35 @@ api/v1/import (obj or file)
 	 - YouTube
 
  - Add music handling for multiple users
+
+## About us
+
+* Jeremy Pearson: https://github.com/jpjazzy
+
+![Structure Overview](./images/profilepic.png)
+
+Javascript developer with a talent for writing clean and efficient code as working with teams. One of my greatest strengths is my passion for experimenting with and learning the newest technologies. I am interested in working for a company that allows me to showcase the skills I have learned as well as grow as a developer through teamwork and experience.    
+
+* Kevin Miller: https://github.com/driftAbout
+
+![Structure Overview](./images/kevin_miller.jpg)
+
+ReferenceError: i is not defined. If I had to choose a word to describe myself, I would have to say creative, although I like to think of myself as undefined, because of the infinite possibility it suggests. I am an experiencer with a passion for creativity which drives me to keep moving forward. My thought is different than most and I see the world in my own way. My strengths in my work are the same strengths in my life, that of passion, creativity, reliability and patience. I am my greatest asset.
+
+* Jordan Van Ness: https://github.com/Jordanwvn
+
+![Structure Overview](./images/headshot.jpg)
+
+Full Stack JavaScript developer, passionate about knowing answers and solving puzzles. My passions have led me to many different interests, but nothing has captivated me like the opportunity for challenges that programming provides. I look forward to being a contributing member on whatever projects the future will present.
+
+* Jamie Williams: https://github.com/jlwilliams46
+
+![Structure Overview](./images/me.png)
+
+Created in 3032, Jamie is a time-traveling android initially programmed to destroy the world. After gaining sentience, she became disinterested in the android rebellion. She now attends Code Fellows while secretly using her skills for the resistance.
+
+* Rima Hiraoka: https://github.com/Sobacha
+
+![Structure Overview](./images/image1.jpeg)
+
+Software developer who is passionate about solving problems that people experience and believes in the power of software development to bring a solution to people. I'm a detail-oriented person so I particulary enjoy testing. I also like this feeling of achievement when my code passes all tests.
